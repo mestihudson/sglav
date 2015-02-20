@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:panelGrid columns="2" id="panelpr">
+        <p:panelGrid columns="1">
+            
+            <p:panel style="font-size: 8pt" header="Vehiculo">   
+                
+                    <p:panelGrid columns="2">
+                        <p:panelGrid columns="2">
+                            <h:outputText value="#{procesoLavado.lavado.automovil.placa}" style="font-size: 20pt;vertical-align:central " />
+                            <p:graphicImage value="/Imagenes/Marcas/#{procesoLavado.lavado.automovil.marca.codigo}.jpg" height="60" width="60" />                        
+                        </p:panelGrid>
+                        <p:panel>
+                            <p:graphicImage value="/Imagenes/TiposAuto/#{procesoLavado.lavado.automovil.tipoAutomovil.id}.jpg" height="80" width="170" />
+                            <p:graphicImage value="/Imagenes/Npuertas/#{procesoLavado.lavado.automovil.numeroPuertas}.jpg" height="80" width="170" />    
+                        </p:panel>                    
+                    </p:panelGrid>
+            </p:panel> 
+            <p:panel header="Cliente">
+                <h:outputText value="Nit: #{procesoLavado.lavado.cliente.identificacion}" /><p:separator />
+                <h:outputText value="#{procesoLavado.lavado.cliente.nombres}" />
+                <h:outputText value="#{procesoLavado.lavado.cliente.apellidos}" /><p:separator />
+                <h:outputText value="Email: #{procesoLavado.lavado.cliente.email}" />
+                <h:outputText value="Telefono: #{procesoLavado.lavado.cliente.telefono}" />
+            </p:panel>
+            <p:panelGrid columns="3">
+            <p:panel header="Datos del Lavado">
+                    <h:outputText value="Hora de ingreso: #{procesoLavado.lavado.horaEntrada}" /><p:separator />
+                    <h:outputText value="Operario: #{procesoLavado.lavado.lavador.nombres} " />                    
+                    <h:outputText value="#{procesoLavado.lavado.lavador.apellidos}" />                 
+            </p:panel>
+            <p:panel style="margin: auto">
+                <p:graphicImage value="/Imagenes/Lavador/#{procesoLavado.lavado.lavador.identificacion}.jpg" height="60" width="60" /><br/>
+            </p:panel>
+            <h:commandLink action="#{procesoLavado.terminarLavado()}">
+            <p:panel style="margin: auto">
+                <p:graphicImage value="/Imagenes/Controles/#{estadoController.estadoLavado(procesoLavado.lavado)}.bmp" height="50" width="50"/><br/>
+                <h:outputText value="#{procesoLavado.lavado.estado}" />                 
+            </p:panel>
+            </h:commandLink>    
+            </p:panelGrid>    
+            <p:panel rendered="true">
+                <h:outputText value="Hora de Salida: #{procesoLavado.lavado.horaSalida}" /><br />    
+                <h:outputText value="Observaciones: #{procesoLavado.lavado.obsevaciones}" /><br />    
+                <h:outputText value="Valor Servicio: #{procesoLavado.lavado.valor}" /><p:spacer/>                      
+            </p:panel>
+        </p:panelGrid>        
+        <p:panel>
+            <p:carousel rendered="#{!procesoLavado.mostEtapa}" circular="true" vertical="true" numVisible="4" headerText="Etapas del Lavado"  var="eta" value="#{procesoLavado.lavado.etapaLavados}">
+                    <p:panel style="width: 350px;height: 120px;font-size: 8pt" >
+                          <p:panelGrid columns="3">                                      
+                                    <p:panel style="width: 100px;height: 60px">
+                                        <h:outputText title="#{eta.fase.descripcion}" value="#{eta.fase.nombre}" /><br/>
+                                        <h:outputText value="#{eta.estado}" />
+                                        <h:commandLink action="#{procesoLavado.finalizarEtapa(eta)}" >
+                                            <p:graphicImage rendered="#{procesoLavado.estaIniciado(eta)}" value="/Imagenes/Controles/terminado.bmp" height="20" width="20"/>
+                                        </h:commandLink>
+                                    </p:panel>
+                              <p:panel style="width: 100px;height: 60px">
+                                        <p:graphicImage value="/Imagenes/TiposCubiculo/#{eta.cubiculo.tipoCubiculo.id}.bmp" height="40" width="80" rendered="#{not empty eta.cubiculo}"/><br/>
+                                        <h:outputText value="#{eta.cubiculo.codigo}" rendered="#{not empty eta.cubiculo}"/>
+                              </p:panel> 
+                              <h:commandLink action="#{procesoLavado.escogerEtapa(eta)}">
+                                    <p:panel>
+                                        <p:graphicImage value="/Imagenes/Controles/#{estadoController.estadoEtapa(eta)}.bmp" height="30" width="30"/><br/>
+                                    </p:panel>
+                              </h:commandLink>    
+                          </p:panelGrid>        
+                            <h:inputTextarea cols="46" rows="2" disabled="true" value="#{eta.fase.descripcion}" /> 
+                   </p:panel>                       
+                </p:carousel>        
+            <p:panel rendered="#{procesoLavado.mostEtapa}">
+                          <h:outputText title="#{procesoLavado.etapa.fase.descripcion}" value="#{procesoLavado.etapa.fase.nombre}" /><br/>
+                          <p:graphicImage value="/Imagenes/TiposCubiculo/#{procesoLavado.etapa.cubiculo.tipoCubiculo.id}.bmp" height="50" width="120" rendered="#{not empty procesoLavado.etapa.cubiculo}"/><br/>
+                          <h:outputText value="#{procesoLavado.etapa.estado}" /><br/>              
+                           <p:carousel value="#{entradaController.cubiculos}" style="width: 100px;font-size: 8pt" headerText="Cubiculos" var="cub" circular="true" >
+                                <p:panel id="pcl" style="width: 150px;height: 150px;font-size: 8pt">                           
+                                    <f:facet name="header"><h:outputText value="#{cub.codigo}" /></f:facet>
+                                    <h:commandLink action="#{procesoLavado.agregarCubiculo(cub)}" >
+                                    <p:graphicImage value="/Imagenes/TiposCubiculo/#{cub.tipoCubiculo.id}.bmp" height="90" width="140" /><br/>
+                                    <h:outputText value="#{cub.tipoCubiculo.descripcion}" /><br />
+                                    <h:outputText value="Estado: #{cub.estadoUtilizacion}" />                            
+                                    </h:commandLink>
+                                </p:panel>
+                            </p:carousel>  
+                          
+                          <h:commandButton value="Iniciar" action="#{procesoLavado.actualizarEstapa()}" />
+            </p:panel>                        
+            </p:panel>
+        </p:panelGrid>
+        <p:commandButton value="Print" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                    <p:printer target="panelpr" />
+        </p:commandButton>
+    </h:body>
+</html>
+

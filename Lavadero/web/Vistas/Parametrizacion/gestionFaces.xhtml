@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+            <h:commandButton rendered="false" value="listar" action="#{servicioController.listarServicios()}" />
+        <p:panelGrid columns="2">
+            <p:panel>
+                <p:dataGrid var="ser" value="#{servicioController.servicios}" rows="3" columns="1">
+                    <p:panel>
+                        <h:outputText value="#{ser.nombre}"/><br />
+                        <h:outputText value="Activo?: "/><h:selectBooleanCheckbox disabled="true" value="#{ser.estado}"/><br />
+                        <h:outputText value="Precio: #{ser.precio}"/><br />
+                        <h:commandButton value=">" action="#{faseController.agregarServicio(ser)}" />
+                    </p:panel>
+                </p:dataGrid>
+            </p:panel>
+            <p:panel>
+                <p:panelGrid columns="1">
+                    <p:panel>
+                    <h:outputText value="#{faseController.face.servicio.nombre}"/><br />
+                    <p:inputTextarea rows="3" cols="45" title="Descripcion:" value="#{faseController.face.servicio.descripcion}"/><br />
+                    <h:outputText value="Duracion: #{faseController.face.servicio.duracionPromedio}"/><br />
+                    </p:panel>
+                    
+                    
+                    <p:panelGrid columns="1">  
+                         <p:selectOneButton value="#{faseController.face.nombre}"  >
+                            <f:selectItem itemLabel="Jabonado" itemValue="Jabonado" />
+                            <f:selectItem itemLabel="Engrasado" itemValue="Engrasado" />
+                            <f:selectItem itemLabel="Enjuague" itemValue="Enjuague" />
+                            <f:selectItem itemLabel="Secado" itemValue="Secado" />
+                            <f:selectItem itemLabel="MotorEnSeco" itemValue="MotorEnSeco" />
+                            <f:selectItem itemLabel="Polichado" itemValue="Polichado" />
+                            <f:selectItem itemLabel="LavadoInferior" itemValue="LavadoInferior" />
+                            <f:selectItem itemLabel="Aspirado" itemValue="Aspirado" />
+                            <f:ajax render="@form" />
+                        </p:selectOneButton>
+                        <p:panelGrid columns="2">
+                        <p:panelGrid columns="2">
+                        <h:outputText value="nombre"/>
+                        <h:inputText id="nom" value="#{faseController.face.nombre}"/>
+                        <h:outputText value="Descripcion"/>
+                        <h:inputTextarea  cols="35" rows="2" value="#{faseController.face.descripcion}"/>
+                        <h:outputText value="Porcentaje"/>
+                        <h:panelGrid columns="1" style="margin-bottom: 10px">
+                            <h:outputText id="output" value="%#{faseController.face.porcentaje}" />
+                            <h:inputHidden id="txt2" value="#{faseController.face.porcentaje}" />
+                            <p:slider for="txt2" display="output" style="width: 350px" displayTemplate="%{value}" />
+                        </h:panelGrid>
+                        <h:commandButton value="Agregar" action="#{faseController.agregarFase()}" />
+                        </p:panelGrid>
+                            <p:panel>
+                                <p:carousel value="#{faseController.fases}"  style="width: 450px" headerText="Fases Programadas para el Servicio" var="fas" circular="true" >
+                                    <p:panel>
+                                        <h:outputText value="#{fas.nombre}" /><br/>
+                                        <h:outputText value="#{fas.descripcion}" /><br/>
+                                        <h:commandButton value="[x]" action="#{faseController.eliminar(fas)}" />
+                                    </p:panel>
+                                </p:carousel>
+                                <h:commandButton value="Registrar" action="#{faseController.guardarFases()}" />
+                            </p:panel>   
+                            
+                       </p:panelGrid>    
+                    </p:panelGrid> 
+                    
+                </p:panelGrid>
+            </p:panel>
+            
+        </p:panelGrid>
+        
+    </h:body>
+</html>
+

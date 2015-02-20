@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        
+    </h:head>
+    <h:body>
+        
+         <p:panelGrid columns="2" rendered="true">
+            <h:outputText value="Identificacion: "/>    
+            <p:inputText value="#{lavadorController.lavador.identificacion}" />
+            <h:outputText value="Apellidos: "/>    
+            <p:inputText value="#{lavadorController.lavador.apellidos}" />
+            <h:outputText value="Nombres: "/>    
+            <p:inputText value="#{lavadorController.lavador.nombres}" />
+            <h:outputText value="Fecha Nacimiento: "/>    
+            <p:calendar value="#{lavadorController.lavador.fechaNacimiento}"/>            
+            <h:outputText value="Telefono: "/>    
+            <p:inputText value="#{lavadorController.lavador.telefono}" />                        
+            <h:outputText value="Direccion: "/> 
+            <p:inputTextarea cols="30" rows="2" value="#{lavadorController.lavador.direccion}" />                     
+            <h:outputText value="Email: "/>    
+            <p:inputText value="#{lavadorController.lavador.email}" />
+            <h:outputText value="Login: "/>    
+            <p:inputText value="#{lavadorController.lavador.login}" />
+            <h:outputText value="Password "/>    
+            <p:inputText value="#{lavadorController.lavador.password}" />  
+            <h:outputText value="Confirmar Password: "/>    
+            <p:inputText value="#{lavadorController.password}" />
+        </p:panelGrid>
+        <h:commandButton action="#{lavadorController.registrar()}" value="Siguiente" />
+        <p:panelGrid columns="1">
+             <h:outputText value="Imagen" />
+             <p:graphicImage value="/Imagenes/Lavador/#{lavadorController.lavador.identificacion}.jpg" height="65" width="120" />
+             <p:fileUpload id="img1" fileUploadListener="#{lavadorController.subirArchivo}" style="font-size: small;width: 430px"
+                                mode="advanced" sizeLimit="900000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>                         
+             <p:selectOneMenu value="#{lavadorController.lavador.especialidad.id}" >
+                <f:selectItems var="esp" value="#{lavadorController.especialidades}" itemLabel="#{esp.descripcion}" itemValue="#{esp.id}" />
+            </p:selectOneMenu>
+        </p:panelGrid>
+        
+        
+    </h:body>
+</html>
+

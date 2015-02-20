@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <p:panelGrid columns="2" rendered="true">
+            <h:outputText value="Identificacion: "/>    
+            <p:inputText value="#{automovilController.propietario.identificacion}" />
+            <h:outputText value="Apellidos: "/>    
+            <p:inputText value="#{automovilController.propietario.apellidos}" />
+            <h:outputText value="Nombres: "/>    
+            <p:inputText value="#{automovilController.propietario.nombres}" />
+            <h:outputText value="Fecha Nacimiento: "/>    
+            <p:calendar value="#{automovilController.propietario.fechaNacimiento}"/>            
+            <h:outputText value="Telefono: "/>    
+            <p:inputText value="#{automovilController.propietario.telefono}" />            
+            <h:outputText value="Municipio: "/>    
+            <p:selectOneMenu value="#{automovilController.propietario.ciudad}">
+                    <f:selectItem itemLabel="Seleccione.." itemValue=""/>
+                    <f:selectItems value="#{automovilController.municipios}" var="mun" itemValue="#{mun.cmun}" itemLabel="#{mun.nomMun}" />
+                </p:selectOneMenu>
+            <h:outputText value="Direccion: "/> 
+            <p:inputTextarea cols="30" rows="2" value="#{automovilController.propietario.direccion}" />
+            <h:outputText value="Ocupacion: "/>  
+            <p:inputTextarea cols="30" rows="1" value="#{automovilController.propietario.ocupacion}"/>            
+            <h:outputText value="Email: "/>    
+            <p:inputText value="#{automovilController.propietario.email}" />
+            <h:outputText value="Login: "/>    
+            <p:inputText value="#{automovilController.propietario.login}" />
+            <h:outputText value="Password "/>    
+            <p:inputText value="#{automovilController.propietario.password}" />  
+            <h:outputText value="Confirmar Password: "/>    
+            <p:inputText value="#{automovilController.password}" />
+        </p:panelGrid>
+        <h:commandButton action="#{automovilController.agregarPropietario()}" value="Siguiente" />
+    </h:body>
+</html>
+
