@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:carousel  circular="true" vertical="false" headerText="Lavados Activos" numVisible="5" value="#{entradaController.lavados}" var="lav">
+            <h:commandLink action="#{procesoLavado.anclarLavado(lav)}">
+            <p:panel style="font-size: 8pt">               
+                    <p:panelGrid columns="2">
+                    <p:panel>
+                        <h:outputText value="#{lav.automovil.placa}" /><br />
+                        <p:graphicImage value="/Imagenes/Marcas/#{lav.automovil.marca.codigo}.jpg" height="30" width="30" />                        
+                    </p:panel>
+                        <p:graphicImage value="/Imagenes/TiposAuto/#{lav.automovil.tipoAutomovil.id}.jpg" height="50" width="90" />
+                    </p:panelGrid><br/>
+                    <h:outputText value="Hora de ingreso: #{lav.horaEntrada}" /><p:separator />
+                    <h:outputText value="#{lav.lavador.nombres} " />                    
+                    <h:outputText value="#{lav.lavador.apellidos}" />                 
+            </p:panel>
+            </h:commandLink>    
+        </p:carousel>
+    </h:body>
+</html>
+

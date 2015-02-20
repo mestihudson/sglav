@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>            
+            <p:panel>
+                <h:outputText value="#{automovilController.propietario.nombres} #{automovilController.propietario.apellidos}" /><br/>
+                <h:outputText value="#{automovilController.propietario.direccion}" />
+            </p:panel>
+            <p:panelGrid columns="2">
+                <p:accordionPanel>
+                <p:tab title="Marcas">
+                <p:dataGrid columns="2" style="width: 400px" paginator="true" rows="4" value="#{automovilController.marcas}" var="marc">
+                    <p:panel style="margin: auto">
+                        <p:graphicImage value="/Imagenes/Marcas/#{marc.codigo}.jpg" height="65" width="120" /><br/>
+                        <h:commandButton value="#{marc.nombre}" action="#{automovilController.agregarMarca(marc)}" style="font-size: 9pt" />
+                    </p:panel>
+                </p:dataGrid>
+                </p:tab>    
+                <p:tab title="Tipos">
+                <p:dataGrid columns="2" style="width: 400px" paginator="true" rows="4" value="#{automovilController.tiposAutomovil}" var="tipa">
+                    <p:panel>
+                        <p:graphicImage value="/Imagenes/TiposAuto/#{tipa.id}.jpg" height="65" width="120" /><br/>
+                        <h:commandButton value="#{tipa.nombre}" action="#{automovilController.agregarTipo(tipa)}" style="font-size: 8pt"/>
+                    </p:panel>
+                </p:dataGrid>   
+                </p:tab>
+                <p:tab title="Numero de Puertas">
+                <p:dataGrid columns="2" style="width: 400px" paginator="true" rows="4" value="#{automovilController.puertas}" var="pue">
+                    <p:panel>
+                        <p:graphicImage value="/Imagenes/Npuertas/#{pue.intValue()}.jpg" height="60" width="100" /><br/>
+                        <h:commandButton value="#{pue.intValue()} Puertas" action="#{automovilController.agregarNP(pue.intValue())}" />
+                    </p:panel>
+                </p:dataGrid> 
+                </p:tab>
+               </p:accordionPanel>
+                <p:panelGrid columns="1">    
+            <p:panelGrid columns="4">
+                <h:outputText value="Placa " />
+                <p:keyboard value="#{automovilController.auto.placa}" />
+                <h:outputText value="Version " />
+                <p:keyboard value="#{automovilController.auto.version}" />
+                <h:outputText value="Municipio: "/>    
+                <p:selectOneMenu value="#{automovilController.auto.ciudad}">
+                    <f:selectItem itemLabel="Seleccione.." itemValue=""/>
+                    <f:selectItems value="#{automovilController.municipios}" var="mun" itemValue="#{mun.cmun}" itemLabel="#{mun.nomMun}" />
+                </p:selectOneMenu>
+                 <h:outputText value="Tipo Combustible: "/> 
+                 <p:selectOneMenu value="#{automovilController.auto.sistemaCombustible}">
+                    <f:selectItem itemLabel="Seleccione.." itemValue=""/>
+                    <f:selectItem itemLabel="Gasolina" itemValue="Gasolina"/>
+                    <f:selectItem itemLabel="Diesel" itemValue="Diesel"/>
+                    <f:selectItem itemLabel="Gas Natural" itemValue="Gas Natural"/>
+                </p:selectOneMenu>
+                 <h:outputText value="Tipo Trasmicion: "/> 
+                <p:selectOneMenu value="#{automovilController.auto.sistema}">
+                    <f:selectItem itemLabel="Seleccione.." itemValue=""/>
+                    <f:selectItem itemLabel="MANUAL" itemValue="MANUAL"/>
+                    <f:selectItem itemLabel="AUTOMATICA" itemValue="AUTOMATICA"/>
+                    <f:selectItem itemLabel="TIPRNIC" itemValue="TIPRNIC"/>
+                     <f:selectItem itemLabel="DSG" itemValue="DSG"/> 
+                     <f:selectItem itemLabel="CVT" itemValue="CVT"/>
+                </p:selectOneMenu>                
+                <h:outputText value="Modelo: " />
+                <h:panelGrid columns="1" style="margin-bottom: 10px">
+                    <p:inputText id="txt1"  value="#{automovilController.auto.modelo}" />
+                    <p:slider for="txt1"  minValue="1970" maxValue="2015" />
+                </h:panelGrid>
+                </p:panelGrid>                     
+                    <p:panelGrid columns="4">
+                        <p:fieldset legend="Marca">
+                            <p:graphicImage value="/Imagenes/Marcas/#{automovilController.auto.marca.codigo}.jpg" height="90" width="180" /><br/>
+                        </p:fieldset>
+                        <p:fieldset legend="Tipo">
+                            <p:graphicImage value="/Imagenes/TiposAuto/#{automovilController.auto.tipoAutomovil.id}.jpg" height="100" width="200" /><br/>
+                        </p:fieldset>
+                        <p:fieldset legend="Puertas">
+                            <p:graphicImage value="/Imagenes/Npuertas/#{automovilController.auto.numeroPuertas}.jpg" height="90" width="180" /><br/>
+                        </p:fieldset>
+                        <p:fieldset legend="Color">
+                            <p:colorPicker value="#{automovilController.auto.color}" />
+                        </p:fieldset>
+                    </p:panelGrid>
+                    <h:commandButton action="#{automovilController.registrar()}" value="Registrar" />
+                    
+                    <p:panel rendered="#{automovilController.verResumen}">
+                        <h:outputText value="Usuario: #{automovilController.propietario.nombres} #{automovilController.propietario.apellidos}"/><br/>
+                        <h:outputText value="Usted ha ingresado al sistema con el automovil:"/><br/>
+                        <p:panelGrid columns="4">
+                            <p:graphicImage value="/Imagenes/Marcas/#{automovilController.auto.marca.codigo}.jpg" height="90" width="180" />
+                            <h:outputText value="#{automovilController.auto.modelo}" />
+                        
+                        <p:graphicImage value="/Imagenes/TiposAuto/#{automovilController.auto.tipoAutomovil.id}.jpg" height="100" width="200" />
+                        <h:outputText value="Placa: #{automovilController.auto.placa}"/>
+                        </p:panelGrid>
+                    </p:panel>                        
+                    
+                </p:panelGrid>
+            </p:panelGrid>    
+            
+        </h:form>
+    </h:body>
+</html>
+

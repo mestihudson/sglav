@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+          <p:panelGrid columns="2">
+          <p:panelGrid columns="1">
+          <p:panelGrid columns="2">
+            <p:panel>
+                <h:outputText value="Placa:" /><br/>
+                <p:keyboard  value="#{entradaController.placa}" style="font-size: 24pt" size="5" 
+                             layout="custom" 
+                             layoutTemplate="1234567890-close,ABCDEFGHIJ-back,KLMNOPQRST-clear,UVXWYZ"/>
+                <h:commandButton value="+" action="#{entradaController.consultar()}"/>
+            </p:panel>
+            <p:panelGrid columns="2">
+                <p:panelGrid columns="2">
+                    <h:outputText value="Marca" />
+                    <p:graphicImage value="/Imagenes/Marcas/#{entradaController.auto.marca.codigo}.jpg" height="30" width="30" />
+                    <h:outputText value="Color" />
+                    <h:inputText style="background-color: #{entradaController.lavado.automovil.color}" value="" size="2" disabled="true"/>
+                    <h:outputText value="Modelo" />
+                    <h:outputText value="#{entradaController.auto.modelo}" />
+                </p:panelGrid>                
+                <p:graphicImage value="/Imagenes/TiposAuto/#{entradaController.auto.tipoAutomovil.id}.jpg" height="80" width="170" />
+            </p:panelGrid>            
+        </p:panelGrid>
+            <p:panel rendered="#{entradaController.mstCagregado}">
+                <h:outputText value="#{entradaController.cliente.identificacion}" />
+                <h:outputText value=" #{entradaController.cliente.nombres}" />                
+                <h:outputText value=" #{entradaController.cliente.apellidos} " />
+                <h:commandButton value="Otro" action="#{entradaController.otroCliente()}"/>
+            </p:panel>
+            <p:panelGrid columns="1" rendered="#{!entradaController.mstCagregado}">
+            <p:panelGrid columns="4">
+                <h:outputText value="Identificacion" />
+                <p:keyboard  value="#{entradaController.identificacion}" size="10"/>                 
+                <h:commandButton value="Consultar" action="#{entradaController.consultarCliente()}" />
+                <h:commandButton value="Propietario" action="#{entradaController.eselPropietario()}" />
+            </p:panelGrid>  
+            <p:panelGrid columns="2">
+            <p:panelGrid columns="2">
+                <h:outputText value="Nombre" />
+                <p:keyboard  value="#{entradaController.cliente.nombres}" size="27" layout="alphabetic"/>    
+                <h:outputText value="Apellido" />
+                <p:keyboard  value="#{entradaController.cliente.apellidos}" size="27" layout="alphabetic"/>
+                <h:outputText value="Email" />
+                <p:keyboard  value="#{entradaController.cliente.email}" size="27"/>
+                <h:outputText value="Telefono" />
+                <p:keyboard  value="#{entradaController.cliente.telefono}" size="10" keypadOnly="true"/>
+            </p:panelGrid>
+            <p:panel>
+                    <h:commandButton action="#{entradaController.agregarCliente()}" value="Registrar" rendered="#{!entradaController.mosOAgregar}" />
+                    <h:commandButton action="#{entradaController.asignarCliente()}" value="Asignar" rendered="#{entradaController.mosOAgregar}" />
+            </p:panel>
+            </p:panelGrid>    
+            </p:panelGrid>
+            
+            <p:panel style="width: 630px">
+                Hoy es: <h:outputText value="#{entradaController.lavado.fecha.toString()}" >
+                            <f:convertDateTime pattern="dd/mm/aaaa"/>
+                        </h:outputText>
+                Hora Entrada: <h:outputText value="#{entradaController.lavado.horaEntrada}" />
+            <p:panelGrid columns="2">
+                <p:panelGrid columns="2">
+                    <p:panelGrid columns="2" style="font-size: 9pt">
+                    <h:outputText value="Marca" />
+                    <p:graphicImage value="/Imagenes/Marcas/#{entradaController.lavado.automovil.marca.codigo}.jpg" height="30" width="30" />
+                    <h:outputText value="Color" />
+                    <h:inputText style="background-color: #{entradaController.lavado.automovil.color}" value="" size="2" disabled="true" />
+                    <h:outputText value="Modelo" />
+                    <h:outputText value="#{entradaController.lavado.automovil.modelo}" />
+                    </p:panelGrid>                
+                <p:graphicImage value="/Imagenes/TiposAuto/#{entradaController.lavado.automovil.tipoAutomovil.id}.jpg" height="50" width="120" />
+                </p:panelGrid>
+                <p:panelGrid columns="2" style="font-size: 9pt">
+                    <h:outputText value="Cliente:" />
+                    <p:inputText value="#{entradaController.lavado.cliente.nombres} #{entradaController.lavado.cliente.apellidos}" disabled="true" size="24"/>    
+                    <h:outputText value="Email" />
+                    <p:inputText  value="#{entradaController.lavado.cliente.email}" size="24" disabled="true"/>
+                    <h:outputText value="Telefono" />
+                    <p:inputText  value="#{entradaController.lavado.cliente.telefono}" size="10" disabled="true"/>
+                </p:panelGrid>
+               
+                
+                
+             </p:panelGrid>    
+                 <p:panelGrid columns="1">
+                     <p:carousel circular="true" headerText="Lavadores" numVisible="4" style="width: 480px;font-size: 8pt" var="lavador" value="#{entradaController.lavadores}" rendered="#{!entradaController.mstLagregado}">
+                        <p:panel style="width: 120px;height: 120px">
+                            <h:commandLink action="#{entradaController.agregarLavador(lavador)}" >
+                            <p:graphicImage value="/Imagenes/Lavador/#{lavador.identificacion}.jpg" height="70" width="80" /><br/>
+                            <h:outputText value="#{lavador.nombres} #{lavador.apellidos}" style="font-size: 10px"/>
+                            </h:commandLink>
+                        </p:panel>
+                    </p:carousel>
+                     <p:panel rendered="#{entradaController.mstLagregado}">
+                        <h:outputText value="#{entradaController.lavado.lavador.identificacion}" />
+                        <h:outputText value=" #{entradaController.lavado.lavador.nombres}" />                
+                        <h:outputText value=" #{entradaController.lavado.lavador.apellidos} " />
+                        <h:commandButton value="Otro" action="#{entradaController.otroLavador()}"/>
+                    </p:panel>
+                </p:panelGrid><br/>
+                <h:commandButton action="#{entradaController.iniciarlavado()}"  image="/Imagenes/Controles/lavar.jpg" style="width: 60px;height: 60px" />
+            </p:panel>    
+            </p:panelGrid>      
+              
+              <p:panelGrid columns="1">
+                  <p:carousel var="ser" style="width: 500px;font-size: 8pt" circular="true" headerText="Servicios disponibles" numVisible="3"  value="#{entradaController.servicios}">
+                        <p:panel style="width: 150px;height: 80px">
+                            <h:commandLink action="#{entradaController.agregarServicio(ser)}" >
+                            <p:panel style="font-size: 8pt">
+                                <h:outputText value="#{ser.nombre}"/><br />
+                                <h:outputText value="Activo?: "/><h:selectBooleanCheckbox disabled="true" value="#{ser.estado}"/><br />
+                                <h:outputText value="Precio: #{ser.precio}"/><br />                                
+                            </p:panel>
+                            </h:commandLink>    
+                        </p:panel>
+                   </p:carousel>
+                      <p:panel>
+                          <p:carousel value="#{entradaController.etapas}"  numVisible="2" style="width: 500px;font-size: 7pt" headerText="Etapas Programadas para el Servicio" var="eta" circular="true" >                            
+                              <p:panel style="width: 210px;height: 100px;font-size: 8pt">
+                                  <p:panelGrid columns="2">                                      
+                                    <p:panel>
+                                        <h:outputText value="#{eta.fase.nombre}" /><br/>
+                                        <h:outputText value="#{eta.estado}" />
+                                    </p:panel>
+                                    <p:panel>
+                                        <p:graphicImage value="/Imagenes/TiposCubiculo/#{eta.cubiculo.tipoCubiculo.id}.bmp" height="30" width="50" rendered="#{not empty eta.cubiculo}"/><br/>
+                                        <h:outputText value="#{eta.cubiculo.codigo}" rendered="#{not empty eta.cubiculo}"/>
+                                    </p:panel>  
+                                  </p:panelGrid>
+                                   <h:inputTextarea cols="25" rows="3" disabled="true" value="#{eta.fase.descripcion}" />                                  
+                               </p:panel>                            
+                           </p:carousel>                                
+                      </p:panel>   
+                  <p:carousel value="#{entradaController.cubiculos}" style="width: 100px;font-size: 8pt" headerText="Cubiculos" var="cub" circular="true" >
+                        <p:panel id="pcl" style="width: 150px;height: 150px;font-size: 8pt">                           
+                            <f:facet name="header"><h:outputText value="#{cub.codigo}" /></f:facet>
+                            <h:commandLink action="#{entradaController.agregarCubiculo(cub)}" >
+                            <p:graphicImage value="/Imagenes/TiposCubiculo/#{cub.tipoCubiculo.id}.bmp" height="90" width="140" /><br/>
+                            <h:outputText value="#{cub.tipoCubiculo.descripcion}" /><br />
+                            <h:outputText value="Estado: #{cub.estadoUtilizacion}" />                            
+                            </h:commandLink>
+                        </p:panel>
+                        
+                        
+                    </p:carousel>   
+                  
+                  
+              </p:panelGrid> 
+              
+              
+            </p:panelGrid>  
+            
+            
+            
+        
+    </h:body>
+</html>
+

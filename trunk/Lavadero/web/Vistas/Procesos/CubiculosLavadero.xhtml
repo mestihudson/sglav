@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:outputText value="#{cubiculoController.lavadero.nombre}" />
+        <p:panel style="width: 710px;height: 250px">
+            <p:dataGrid columns="3" paginator="true" rows="3" var="cub" value="#{cubiculoController.cubiculos}">
+            <p:panel id="pcl" style="width: 200px;height: 150px">
+                <f:facet name="header"><h:outputText value="#{cub.codigo}" /></f:facet>
+                <p:graphicImage value="/Imagenes/TiposCubiculo/#{cub.tipoCubiculo.id}.bmp" height="100" width="170" /><br/>
+                <h:outputText value="#{cub.tipoCubiculo.descripcion}" /><br />
+                <h:outputText value="Estado: #{cub.estadoUtilizacion}" />
+                <h:commandButton value="ver" action="#{cubiculoController.consultarCubiculo(cub)}" />
+            </p:panel>
+            <p:draggable for="pcl" />
+            </p:dataGrid>
+        </p:panel>
+        <p:panel>
+            <ui:include src="/Vistas/Parametrizacion/editarCubiculos.xhtml" />
+        </p:panel>
+        
+    </h:body>
+</html>
+

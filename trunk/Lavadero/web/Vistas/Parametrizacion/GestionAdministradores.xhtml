@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+        <p:panelGrid columns="2">
+        <p:panelGrid columns="2">                    
+            <h:outputText value="Nombres" />
+            <p:inputText value="#{administradorController.admin.nombres}" />
+            <h:outputText value="Apellidos" />
+            <p:inputText value="#{administradorController.admin.apellidos}" />
+            <h:outputText value="Identificacion" />
+            <p:inputText value="#{administradorController.admin.identificacion}" />
+            <h:outputText value="FechaNacimiento" />
+            <p:calendar value="#{administradorController.admin.fechaNacimiento}" />
+            <h:outputText value="Direccion" />
+            <p:inputTextarea value="#{administradorController.admin.direccion}" />
+            <h:outputText value="Ciudad" />
+            <p:inputText value="#{administradorController.admin.ciudad}" />
+            <h:outputText value="Telefono" />
+            <p:inputText value="#{administradorController.admin.telefono}" />
+       </p:panelGrid>
+       <p:panelGrid columns="2">
+            <h:outputText value="Login" />
+            <p:inputText value="#{administradorController.admin.login}" />
+            <h:outputText value="Password" />
+            <p:inputText value="#{administradorController.admin.password}" />
+            <h:outputText value="Confirmar Password" />
+            <p:inputText value="#{administradorController.passw}" />
+            <h:outputText value="Perfil" />
+            <p:inputText value="#{administradorController.admin.perfil}" />
+            <h:outputText value="Email" />
+            <p:inputText value="#{administradorController.admin.email}" />
+            <h:commandButton value="Guardar" action="#{administradorController.guardar()}" /> 
+       </p:panelGrid>
+            
+       </p:panelGrid>     
+            <p:growl life="5000"/>     
+      </h:form>
+    </h:body>
+</html>
+

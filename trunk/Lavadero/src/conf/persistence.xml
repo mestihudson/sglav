@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+  <persistence-unit name="LavaderoPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>com.entity.Administrador</class>
+    <class>com.entity.Automovil</class>
+    <class>com.entity.CaracteristicasAuto</class>
+    <class>com.entity.Cliente</class>
+    <class>com.entity.Cubiculo</class>
+    <class>com.entity.Especialidad</class>
+    <class>com.entity.EtapaLavado</class>
+    <class>com.entity.Fase</class>
+    <class>com.entity.Lavadero</class>
+    <class>com.entity.Lavado</class>
+    <class>com.entity.Lavador</class>
+    <class>com.entity.Programacion</class>
+    <class>com.entity.Propietario</class>
+    <class>com.entity.Revision</class>
+    <class>com.entity.Servicio</class>
+    <class>com.entity.ServiciosLavado</class>
+    <class>com.entity.ServiciosProgramados</class>
+    <class>com.entity.TipoAutomovil</class>
+    <class>com.entity.TipoCubiculo</class>
+    <class>com.entity.TipoServicio</class>
+    <class>com.entity.Usuario</class>
+    <class>com.entity.Municipio</class>
+    <class>com.entity.Marca</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="hibernate.connection.username" value="root"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+      <property name="hibernate.connection.password" value=""/>
+      <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/lavacar?zeroDateTimeBehavior=convertToNull"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>
+  </persistence-unit>
+</persistence>
