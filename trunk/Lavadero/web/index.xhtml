@@ -5,14 +5,17 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>inicio</title>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+       
     </h:head>
     <h:body>
-        <h:form enctype="multipart/form-data"> 
+
+        <h:form >
+            <p:growl id="msg" />
             <ui:include src="/Vistas/Plantillas/Inicial.xhtml" />
-            <p:growl />
+           
         </h:form>
-        
     </h:body>
 </html>
 

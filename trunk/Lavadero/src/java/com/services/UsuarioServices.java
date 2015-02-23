@@ -17,28 +17,26 @@ import javax.persistence.Query;
  *
  * @author Jcmm80
  */
-public class UsuarioServices extends ImplDao<Usuario, Long> implements IUsuario,Serializable{
-    
-    
-    public Usuario ingresar(String l,String c){
-        EntityManager em =ImplDao.getEntityManagger();
-        Usuario usu=new Usuario();
-        em.getTransaction().begin();        
-        try{
-        String q="select u from Usuario u where u.login = ?1 and u.password = ?2";        
-        System.out.println(" Consulta: "+q);
-        Query qu=em.createQuery(q)
-                .setParameter(1, l)
-                .setParameter(2, c);
-        usu=(Usuario)qu.getSingleResult();
-        }catch(Exception ex){
-            FacesUtil.addErrorMessage("Error Inicio Session",ex.getMessage() );
-        }finally{
-            em.close();        
+public class UsuarioServices extends ImplDao<Usuario, Long> implements IUsuario, Serializable {
+
+    public Usuario ingresar(String l, String c) {
+        EntityManager em = ImplDao.getEntityManagger();
+        Usuario usu = new Usuario();
+        em.getTransaction().begin();
+        try {
+            String q = "select u from Usuario u where u.login = ?1 and u.password = ?2";
+            System.out.println(" Consulta: " + q);
+            Query qu = em.createQuery(q)
+                    .setParameter(1, l)
+                    .setParameter(2, c);
+            usu = (Usuario) qu.getSingleResult();
+        } catch (Exception ex) {
+            usu = null;
+        } finally {
+            em.close();
         }
-        
-        return  usu;
+
+        return usu;
     }
-    
-     
+
 }
