@@ -10,11 +10,14 @@ import com.entity.Propietario;
 import com.entity.Usuario;
 import com.services.PropietarioServices;
 import com.services.UsuarioServices;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -22,111 +25,129 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class UsuarioController implements Serializable{
+public class UsuarioController implements Serializable {
 
-    private Usuario usuario=new Usuario();
-    private Propietario propietario=new Propietario();
-    
-    
+    private Usuario usuario = new Usuario();
+    private Propietario propietario = new Propietario();
+    private String usu= new String();
+    private String pasword= new String();
+
     @ManagedProperty("#{administradorController}")
-    private AdministradorController admcon=new AdministradorController();
+    private AdministradorController admcon = new AdministradorController();
     @ManagedProperty("#{automovilController}")
-    private AutomovilController autcon=new AutomovilController();
+    private AutomovilController autcon = new AutomovilController();
     @ManagedProperty("#{clienteController}")
-    private ClienteController clicon=new ClienteController();
+    private ClienteController clicon = new ClienteController();
     @ManagedProperty("#{entradaController}")
-    private EntradaController entcon=new EntradaController();
-    
-    
-    UsuarioServices us=new UsuarioServices();
-    PropietarioServices ps=new PropietarioServices();
-    
-    String PAGINALAVADERO="../Procesos/LavaderosUsuario.xhtml";
-    String PLAVADEROACTUAL="../Parametrizacion/GestionLavadero.xhtml";
-    String PGAUTOMOVIL="../Parametrizacion/GestionAutomoviles.xhtml";
-    String PCUBLAVADER="../Procesos/CubiculosLavadero.xhtml";
-    String PINSCRIPCION="../Procesos/Inscripcion.xhtml";
-    String MISAUTOS="../Procesos/MisAutomoviles.xhtml";
-    String MISLAVADOS="../Procesos/MisLavados.xhtml";
-    String LAVADOSCLIENTE="../Procesos/LavadosCliente.xhtml";
-    private String PAGINAACTUALI="";
-    private String PAGINAACTUALC="";
-    String MENUADMINISTRADOR="../Plantillas/menuAdministrador.xhtml";
-    
-    private boolean mostPL;
+    private EntradaController entcon = new EntradaController();
+
+    UsuarioServices us = new UsuarioServices();
+    PropietarioServices ps = new PropietarioServices();
+
+    String PAGINALAVADERO = "../Procesos/LavaderosUsuario.xhtml";
+    String PLAVADEROACTUAL = "../Parametrizacion/GestionLavadero.xhtml";
+    String PGAUTOMOVIL = "../Parametrizacion/GestionAutomoviles.xhtml";
+    String PCUBLAVADER = "../Procesos/CubiculosLavadero.xhtml";
+    String PINSCRIPCION = "../Procesos/Inscripcion.xhtml";
+    String MISAUTOS = "../Procesos/MisAutomoviles.xhtml";
+    String MISLAVADOS = "../Procesos/MisLavados.xhtml";
+    String LAVADOSCLIENTE = "../Procesos/LavadosCliente.xhtml";
+    String GMAPLAVADEROS="../Procesos/Gmap.xhtml";
+    private String PAGINAACTUALI = "";
+    private String PAGINAACTUALC = "";
+    String MENUADMINISTRADOR = "../Plantillas/menuAdministrador.xhtml";
+
+    private boolean mostPL=true;
     private boolean mostrarInscrip;
     private boolean mostrarPAI;
+
     /**
      * Creates a new instance of UsuarioController
      */
     public UsuarioController() {
-        mostPL=true;
+        mostPL = true;
     }
 
-    public void inscribir(){
-       verInscripcion();
-       mostPL=false; 
+    public void inscribir() {
+        verInscripcion();
+        mostPL = false;
     }
-    
-    public void escogerLavadero(Lavadero l){
+    public void gpsdirecionar() throws IOException{
+    PAGINAACTUALC=GMAPLAVADEROS;
+    mostPL = false;
+    }
+
+    public void escogerLavadero(Lavadero l) {
         getAdmcon().escogerLavadro(l);
         setPAGINAACTUALI(MENUADMINISTRADOR);
         setPAGINAACTUALC("");
-        mostrarPAI=true;
-        
+        mostrarPAI = true;
+
     }
-    
-    public void iniciar(){
-        usuario=us.ingresar(usuario.getLogin(), usuario.getPassword());
-        if(usuario.getPerfil().equals("Administrador")){
-            getAdmcon().setAdmin(getAdmcon().adser.consultar(Administrador.class, usuario.getId()));
-            getAdmcon().listarLavaderos(usuario.getId());
-            //setPAGINAACTUALI(PAGINALAVADERO);
-            setPAGINAACTUALC(PAGINALAVADERO);
-            entcon.listarLavadosEP();
-            mostrarInscrip=false;        
-            mostrarPAI=false;
-        }if(usuario.getPerfil().equals("Cliente")){
-            propietario=ps.consultar(Propietario.class, usuario.getId());
-            autcon.setPropietario(propietario);            
-            clicon.setCliente(propietario);            
-            autcon.listarAutomoviles(propietario.getId());
-            clicon.listarLavadosCliente();
-            PAGINAACTUALI=MISAUTOS;
-            entcon.listarLavadosCliente(propietario);
-            setPAGINAACTUALC(LAVADOSCLIENTE);
-            mostrarPAI=true;
+
+    public void iniciar() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        usuario = us.ingresar(getUsu(), getPasword());
+        if (usuario != null) {
+            if (usuario.getPerfil().equals("Administrador")) {
+                getAdmcon().setAdmin(getAdmcon().adser.consultar(Administrador.class, usuario.getId()));
+                getAdmcon().listarLavaderos(usuario.getId());
+                //setPAGINAACTUALI(PAGINALAVADERO);
+                setPAGINAACTUALC(PAGINALAVADERO);
+                entcon.listarLavadosEP();
+                mostrarInscrip = false;
+                mostrarPAI = false;
+            }
+                if (usuario.getPerfil().equals("Cliente")) {
+                    propietario = ps.consultar(Propietario.class, usuario.getId());
+                    autcon.setPropietario(propietario);
+                    clicon.setCliente(propietario);
+                    autcon.listarAutomoviles(propietario.getId());
+                    clicon.listarLavadosCliente();
+                    PAGINAACTUALI = MISAUTOS;
+                    entcon.listarLavadosCliente(propietario);
+                    setPAGINAACTUALC(LAVADOSCLIENTE);
+                    mostrarPAI = true;
+                }
+            
+            mostPL = false;
+        } else {
+           usuario=null;
+            context.addMessage(null, new FacesMessage("Error de Autenticacion","-"+"Usuario o Contraseña Incorrectos"));
         }
-        mostPL=false;            
+
     }
-    
-    public void cerrar(){
-        usuario=new Usuario();
-        mostPL=true;   
+
+    public void cerrar() {
+        admcon= new AdministradorController();
+        usuario = new Usuario();
+        mostPL = true;
         getAdmcon().setLavaderos(new LinkedList());
         setPAGINAACTUALI("");
         setPAGINAACTUALC("");
     }
-    
-    public void verLavadero(){
-        PAGINAACTUALC=PLAVADEROACTUAL;        
+
+    public void verLavadero() {
+        PAGINAACTUALC = PLAVADEROACTUAL;
     }
-    
-    public void verInscripcion(){
-        PAGINAACTUALC=PINSCRIPCION;
+
+    public void verInscripcion() {
+        PAGINAACTUALC = PINSCRIPCION;
     }
-    public void verGAutomovil(){
-        PAGINAACTUALC=PGAUTOMOVIL;
+
+    public void verGAutomovil() {
+        PAGINAACTUALC = PGAUTOMOVIL;
     }
-    
-    public void verCubiculos(){
-        PAGINAACTUALI=PAGINALAVADERO;
-        PAGINAACTUALC=PCUBLAVADER;        
+
+    public void verCubiculos() {
+        PAGINAACTUALI = PAGINALAVADERO;
+        PAGINAACTUALC = PCUBLAVADER;
     }
-    
-    public void verEntrada(){
+
+    public void verEntrada() {
         setPAGINAACTUALC("../Procesos/Entrada.xhtml");
     }
+
     /**
      * @return the usuario
      */
@@ -279,5 +300,21 @@ public class UsuarioController implements Serializable{
      */
     public void setEntcon(EntradaController entcon) {
         this.entcon = entcon;
+    }
+
+    public String getUsu() {
+        return usu;
+    }
+
+    public void setUsu(String usu) {
+        this.usu = usu;
+    }
+
+    public String getPasword() {
+        return pasword;
+    }
+
+    public void setPasword(String pasword) {
+        this.pasword = pasword;
     }
 }

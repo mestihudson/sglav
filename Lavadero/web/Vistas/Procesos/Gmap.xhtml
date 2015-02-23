@@ -11,20 +11,28 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-       <p:gmap center="10.400461217898574,-75.55544648135378" type="ROADMAP" zoom="15"    
-                                              style="width:100%;height:400px"  model="#{controlSesion.advancedModel}" >
-                                    <p:ajax event="overlaySelect" listener="#{controlSesion.markerSelect}" />  
-                                    <p:gmapInfoWindow>  
-                                        <p:outputPanel style="text-align:center;display:block;margin:auto">  
+       
+         <h:form>  
+            <p:gmap id="gmap" center="10.400461217898574,-75.55544648135378" type="ROADMAP" zoom="15"  model="#{lavaderoController.advancedModel}" style="width:100%;height:400px">
 
-                                            <p:graphicImage value="Imagenes/souk.jpg" height="150"/>  
-                                            <br />  
-                                            <h:outputText value="#{controlSesion.marker.title}" />  
+                <p:ajax event="overlaySelect" listener="#{lavaderoController.onMarkerSelect}" />
 
-                                        </p:outputPanel>  
+                <p:gmapInfoWindow id="infoWindow">
+                    <p:outputPanel style="text-align: center; display: block; margin: auto">
 
-                                    </p:gmapInfoWindow>  
-                                </p:gmap>
+                        <p:graphicImage value="../Imagenes/TiposAuto/1.jpg" height="150" />
+                        <br />
+                        <h:outputText value="#{lavaderoController.marker.title}" />
+
+                    </p:outputPanel>
+                </p:gmapInfoWindow>
+            </p:gmap>
+
+            <!-- Preload for demo -->
+            <p:outputPanel style="display:none">
+               
+            </p:outputPanel>
+        </h:form>
     </h:body>
 </html>
 
