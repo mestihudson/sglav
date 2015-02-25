@@ -13,7 +13,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <center>
+         <center>
             <div class="container" >
                 <header>
 
@@ -22,8 +22,8 @@
                 </header>
             </div>
             <h:form>  
-                <p:gmap id="gmap"  center="10.411674565058615,-75.48630986178591" type="ROADMAP" zoom="13"  model="#{lavaderoController.advancedModel}" 
-                        class="gmap">
+               <p:gmap   center="10.411674565058615,-75.48630986178591" type="ROADMAP" zoom="13"  model="#{lavaderoController.advancedModel}" 
+                         styleClass="gmap">
 
                     <p:ajax event="overlaySelect" listener="#{lavaderoController.onMarkerSelect}" />
 
@@ -37,13 +37,10 @@
                         </p:outputPanel>
                     </p:gmapInfoWindow>
                 </p:gmap>
-
-                <!-- Preload for demo -->
-                <p:outputPanel style="display:none">
-
-                </p:outputPanel>
             </h:form>
+             <p:commandButton value="Regresar" actionListener="#{usuarioController.direcionarInicio()}"/>
         </center>
+       
 
     </h:body>
 </html>

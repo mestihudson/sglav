@@ -1,0 +1,19 @@
+body {
+    background: #563c55 url(../../Imagenes/fondos/fondo.jpeg) no-repeat center top;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+
+
+#panel .ui-panel-content {
+    border: 0;
+    background: red; 
+    padding: 0.5em 1em;
+}
+#panel .ui-widget-content  {
+    border: 0;
+    padding: 0.5em 1em;
+   background: rgba(250,250,250,0.5);
+    //border: transparent;
+}
