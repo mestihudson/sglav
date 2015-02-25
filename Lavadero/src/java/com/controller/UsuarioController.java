@@ -29,8 +29,8 @@ public class UsuarioController implements Serializable {
 
     private Usuario usuario = new Usuario();
     private Propietario propietario = new Propietario();
-    private String usu= new String();
-    private String pasword= new String();
+    private String usu = new String();
+    private String pasword = new String();
 
     @ManagedProperty("#{administradorController}")
     private AdministradorController admcon = new AdministradorController();
@@ -52,12 +52,12 @@ public class UsuarioController implements Serializable {
     String MISAUTOS = "../Procesos/MisAutomoviles.xhtml";
     String MISLAVADOS = "../Procesos/MisLavados.xhtml";
     String LAVADOSCLIENTE = "../Procesos/LavadosCliente.xhtml";
-    String GMAPLAVADEROS="../Procesos/Gmap.xhtml";
+    String GMAPLAVADEROS = "../Procesos/Gmap.xhtml";
     private String PAGINAACTUALI = "";
     private String PAGINAACTUALC = "";
     String MENUADMINISTRADOR = "../Plantillas/menuAdministrador.xhtml";
 
-    private boolean mostPL=true;
+    private boolean mostPL = true;
     private boolean mostrarInscrip;
     private boolean mostrarPAI;
 
@@ -72,9 +72,11 @@ public class UsuarioController implements Serializable {
         verInscripcion();
         mostPL = false;
     }
-    public void gpsdirecionar() throws IOException{
-    PAGINAACTUALC=GMAPLAVADEROS;
-    mostPL = false;
+
+    public void gpsdirecionar() throws IOException {
+        FacesContext contex = FacesContext.getCurrentInstance();
+        contex.getExternalContext().redirect("Vistas/Procesos/Gmap.xhtml");
+        
     }
 
     public void escogerLavadero(Lavadero l) {
@@ -98,28 +100,28 @@ public class UsuarioController implements Serializable {
                 mostrarInscrip = false;
                 mostrarPAI = false;
             }
-                if (usuario.getPerfil().equals("Cliente")) {
-                    propietario = ps.consultar(Propietario.class, usuario.getId());
-                    autcon.setPropietario(propietario);
-                    clicon.setCliente(propietario);
-                    autcon.listarAutomoviles(propietario.getId());
-                    clicon.listarLavadosCliente();
-                    PAGINAACTUALI = MISAUTOS;
-                    entcon.listarLavadosCliente(propietario);
-                    setPAGINAACTUALC(LAVADOSCLIENTE);
-                    mostrarPAI = true;
-                }
-            
+            if (usuario.getPerfil().equals("Cliente")) {
+                propietario = ps.consultar(Propietario.class, usuario.getId());
+                autcon.setPropietario(propietario);
+                clicon.setCliente(propietario);
+                autcon.listarAutomoviles(propietario.getId());
+                clicon.listarLavadosCliente();
+                PAGINAACTUALI = MISAUTOS;
+                entcon.listarLavadosCliente(propietario);
+                setPAGINAACTUALC(LAVADOSCLIENTE);
+                mostrarPAI = true;
+            }
+
             mostPL = false;
         } else {
-           usuario=null;
-            context.addMessage(null, new FacesMessage("Error de Autenticacion","-"+"Usuario o Contraseña Incorrectos"));
+            usuario = null;
+            context.addMessage(null, new FacesMessage("Error de Autenticacion", "-" + "Usuario o Contraseña Incorrectos"));
         }
 
     }
 
     public void cerrar() {
-        admcon= new AdministradorController();
+        admcon = new AdministradorController();
         usuario = new Usuario();
         mostPL = true;
         getAdmcon().setLavaderos(new LinkedList());
