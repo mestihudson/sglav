@@ -32,13 +32,13 @@ public class LavaderoController implements Serializable {
 
     //objetod de negocio
     private Lavadero lavadero = new Lavadero();
-    
+
     //colecciones
-    private List<Lavadero> lavaderos=new LinkedList();
+    private List<Lavadero> lavaderos = new LinkedList();
 
     //servicios
     LavaderoServices lavser = new LavaderoServices();
-    
+
     //controladores
     @ManagedProperty("#{usuarioController}")
     private UsuarioController usucon = new UsuarioController();
@@ -55,27 +55,13 @@ public class LavaderoController implements Serializable {
      */
     public LavaderoController() {
         advancedModel = new DefaultMapModel();
-
-        //Shared coordinates
-        LatLng coord1 = new LatLng(36.879466, 30.667648);
-        LatLng coord2 = new LatLng(36.883707, 30.689216);
-        LatLng coord3 = new LatLng(36.879703, 30.706707);
-        LatLng coord4 = new LatLng(36.885233, 30.702323);
-
-        //Icons and Data
-        advancedModel.addOverlay(new Marker(coord1, "Konyaalti", "konyaalti.png", "http://maps.google.com/mapfiles/ms/micons/red-pushpin.png" ));
-        advancedModel.addOverlay(new Marker(coord2, "Ataturk Parki", "ataturkparki.png"));
-        advancedModel.addOverlay(new Marker(coord4, "Kaleici", "kaleici.png", "http://maps.google.com/mapfiles/ms/micons/pink-dot.png"));
-        advancedModel.addOverlay(new Marker(coord3, "Karaalioglu Parki", "karaalioglu.png", "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png"));
         System.out.println("Este es La lista de lavaderos");
-        for (Lavadero lavadero1 :getLavaderos()) {
-            LatLng coord6 = new LatLng(lavadero1.getCorrdenadax(),lavadero1.getCorrdenaday());
-            System.out.println(lavadero1.getNombre());
-            advancedModel.addOverlay(new Marker(coord6,lavadero1.getNombre(),"", "http://maps.google.com/mapfiles/ms/micons/"+lavadero1.getEstado()+"-pushpin.png"));
+        for (Lavadero lavadero1 : getLavaderos()) {
+            LatLng coord = new LatLng(lavadero1.getCorrdenadax(), lavadero1.getCorrdenaday());
+            System.out.println(lavadero1.getNombre() + "posision x" + lavadero1.getCorrdenadax() + "posision y" + lavadero1.getCorrdenaday());
+            advancedModel.addOverlay(new Marker(coord, lavadero1.getNombre(), "", "http://maps.google.com/mapfiles/ms/micons/" + lavadero1.getEstado() + "-pushpin.png"));
         }
     }
-
-    
 
     public void editarLavadero(Lavadero l) {
         lavadero = l;
@@ -135,8 +121,6 @@ public class LavaderoController implements Serializable {
         this.usucon = usucon;
     }
 
-    
-
     public MapModel getSimpleModel() {
         return simpleModel;
     }
@@ -150,10 +134,12 @@ public class LavaderoController implements Serializable {
     public Marker getMarker() {
         return marker;
     }
+
     public MapModel getAdvancedModel() {
         return advancedModel;
     }
-/**
+
+    /**
      * @return the lavaderos
      */
     public List<Lavadero> getLavaderos() {

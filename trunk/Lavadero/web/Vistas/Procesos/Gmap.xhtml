@@ -4,35 +4,47 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+
       xmlns:ui="http://java.sun.com/jsf/facelets">  
     <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" ></script>
-   
+
     <h:head>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/style.css" />
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-       
-         <h:form>  
-            <p:gmap id="gmap" center="10.400461217898574,-75.55544648135378" type="ROADMAP" zoom="15"  model="#{lavaderoController.advancedModel}" style="width:100%;height:400px">
+        <center>
+            <div class="container" >
+                <header>
 
-                <p:ajax event="overlaySelect" listener="#{lavaderoController.onMarkerSelect}" />
+                    <p:graphicImage value="../../Imagenes/logo.png" style="z-index: 10" /> 
 
-                <p:gmapInfoWindow id="infoWindow">
-                    <p:outputPanel style="text-align: center; display: block; margin: auto">
+                </header>
+            </div>
+            <h:form>  
+                <p:gmap id="gmap"  center="10.411674565058615,-75.48630986178591" type="ROADMAP" zoom="13"  model="#{lavaderoController.advancedModel}" 
+                        class="gmap">
 
-                        <p:graphicImage value="../Imagenes/TiposAuto/1.jpg" height="150" />
-                        <br />
-                        <h:outputText value="#{lavaderoController.marker.title}" />
+                    <p:ajax event="overlaySelect" listener="#{lavaderoController.onMarkerSelect}" />
 
-                    </p:outputPanel>
-                </p:gmapInfoWindow>
-            </p:gmap>
+                    <p:gmapInfoWindow id="infoWindow">
+                        <p:outputPanel style="text-align: center; display: block; margin: auto">
 
-            <!-- Preload for demo -->
-            <p:outputPanel style="display:none">
-               
-            </p:outputPanel>
-        </h:form>
+                            <p:graphicImage value="../Imagenes/TiposAuto/1.jpg" height="150" />
+                            <br />
+                            <h:outputText value="#{lavaderoController.marker.title}" />
+
+                        </p:outputPanel>
+                    </p:gmapInfoWindow>
+                </p:gmap>
+
+                <!-- Preload for demo -->
+                <p:outputPanel style="display:none">
+
+                </p:outputPanel>
+            </h:form>
+        </center>
+
     </h:body>
 </html>
 
