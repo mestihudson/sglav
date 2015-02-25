@@ -6,17 +6,25 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/transparente.css" />
     </h:head>
     <h:body>
-        <h:form>
-        <p:panel rendered="#{!automovilController.sigPanel}">
-            <ui:include src="../Parametrizacion/RegistroPropietario.xhtml" />
-        </p:panel>
-        <p:panel rendered="#{automovilController.sigPanel}">
-            <ui:include src="../Parametrizacion/GestionAutomoviles.xhtml" />
-        </p:panel>
-        </h:form>
-        
+        <center>
+            <h:form style="alignment-adjust: central">
+                <div class="container" >
+                    <header>
+                        <p:graphicImage value="../../Imagenes/logo.png" style="z-index: 10" /> 
+                    </header>
+                </div>
+                <p:panel rendered="#{!automovilController.sigPanel}" id="panel" >
+                    <ui:include src="../Parametrizacion/RegistroPropietario.xhtml" />
+                </p:panel>
+                <p:panel rendered="#{automovilController.sigPanel}">
+                    <ui:include src="../Parametrizacion/GestionAutomoviles.xhtml" />
+                </p:panel>
+                 <p:commandButton value="Regresar" actionListener="#{usuarioController.direcionarInicio()}"/>
+            </h:form>
+        </center>
     </h:body>
 </html>
 

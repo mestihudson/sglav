@@ -73,9 +73,18 @@ public class UsuarioController implements Serializable {
         mostPL = false;
     }
 
-    public void gpsdirecionar() throws IOException {
+    public void direcionarGPS() throws IOException {
         FacesContext contex = FacesContext.getCurrentInstance();
         contex.getExternalContext().redirect("Vistas/Procesos/Gmap.xhtml");
+    }
+     public void direcionarInscripcion() throws IOException {
+        FacesContext contex = FacesContext.getCurrentInstance();
+        contex.getExternalContext().redirect("Vistas/Procesos/Inscripcion.xhtml");
+    }
+
+    public void direcionarInicio() throws IOException {
+        FacesContext contex = FacesContext.getCurrentInstance();
+        contex.getExternalContext().redirect("../../..");
         
     }
 
