@@ -10,13 +10,13 @@
     </h:head>
     <h:body>
         <center>
-            <h:form style="alignment-adjust: central">
+            <h:form style="alignment-adjust: central" styleClass="panel">
                 <div class="container" >
                     <header>
                         <p:graphicImage value="../../Imagenes/logo.png" style="z-index: 10" /> 
                     </header>
                 </div>
-                <p:panel rendered="#{!automovilController.sigPanel}" id="panel" >
+                <p:panel rendered="#{!automovilController.sigPanel}"  >
                     <ui:include src="../Parametrizacion/RegistroPropietario.xhtml" />
                 </p:panel>
                 <p:panel rendered="#{automovilController.sigPanel}">
