@@ -10,8 +10,7 @@
     </h:head>
     <h:body>
         <p:layout fullPage="true">
-            <h:form id="form1">
-                <p:growl id="msg1" />
+         
                 <p:layoutUnit position="north" size="100" >
 
                     <h:outputText  value="Sesion de: #{administradorController.admin.nombres} #{administradorController.admin.apellidos}" />
@@ -32,7 +31,6 @@
                     <ui:include src="#{usuarioController.PAGINAACTUALC}" />
                 </p:layoutUnit>
 
-            </h:form>
 
         </p:layout>
 
