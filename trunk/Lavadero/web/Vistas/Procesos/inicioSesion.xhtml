@@ -7,43 +7,41 @@
     <h:head>
         <title>Inicio de Sesion</title>
         <link rel="stylesheet" type="text/css" href="../../resources/css/style.css" />
-        <style>
-           
-        </style>
+        
     </h:head>
     <h:body> 
         <p:panel styleClass="form-3" rendered="#{usuarioController.mostPL}" style="width:600px" >
-             <div class="container" >
-            <header>
-                <h1 ><strong >Bienbenidos</strong></h1>
-                 <p:graphicImage value="../../Imagenes/logo.png" /> 
-                <h2 >Porfavor ingresar Para Obtener Acceso a la Pagina!!</h2>
-        </header>
-        </div>
-            <p class="clearfix">
-                <label for="login">Username</label>
-                <p:inputText value="#{usuarioController.usu}" />
-                <label for="password">Password</label>
-                <p:keyboard password="true"  value="#{usuarioController.pasword}" />
-            </p>    
-            <p class="clearfix">
-                <h:commandButton style="width:100%" value="Iniciar"  actionListener="#{usuarioController.iniciar()}"  />
-            </p>
-            
-            <p class="clearfix">
-                <h:commandButton  style="width:100%" value="GPS" action="#{usuarioController.direcionarGPS()}"/>  
-            </p> 
-            
-            <p class="clearfix">
-                <h:commandButton   style="width:100%" value="Inscribirse" action="#{usuarioController.direcionarInscripcion()}"/>
+            <h:form >
+                <p:growl id="msg" />
+                <div class="container" >
+                    <header>
+                        <h1 ><strong >Bienbenidos</strong></h1>
+                        <p:graphicImage value="../../Imagenes/logo.png" /> 
+                        <h2 >Porfavor ingresar Para Obtener Acceso a la Pagina!!</h2>
+                    </header>
+                </div>
+                <p class="clearfix">
+                    <label for="login">Username</label>
+                    <p:inputText value="#{usuarioController.usu}" />
+                    <label for="password">Password</label>
+                    <p:keyboard password="true"  value="#{usuarioController.pasword}" />
+                </p>    
+                <p class="clearfix">
+                    <h:commandButton style="width:100%" value="Iniciar" actionListener="#{usuarioController.iniciar()}"  />
+                </p>
+                <p class="clearfix">
+                    <h:commandButton   style="width:100%" value="Inscribirse" action="#{usuarioController.direcionarInscripcion()}"/>
+                    <h:commandButton  style="width:100%" value="GPS" action="#{usuarioController.direcionarGPS()}"/>  
 
-            </p>
-            
+                </p>
+            </h:form>
         </p:panel>
-       
+
 
         <p:panel rendered="#{!usuarioController.mostPL}" >
-            <ui:include src="../Plantillas/ManejadorVistas.xhtml" />
+           
+                <ui:include src="../Plantillas/ManejadorVistas.xhtml" />
+           
         </p:panel>
 
 

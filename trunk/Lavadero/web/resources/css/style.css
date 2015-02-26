@@ -1,6 +1,11 @@
 @import url('demo.css');
 @import url('font-awesome.css');
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
+*{
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif ;
+    font-size:11px; 
+
+}
 body {
     background: #563c55 url(../../Imagenes/fondos/fondo.jpeg) no-repeat center top;
     -webkit-background-size: cover;

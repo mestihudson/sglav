@@ -5,13 +5,18 @@ body {
     background-size: cover;
 }
 
+.panel .ui-widget-content {
+border: transparent;
+background: rgba(250,250,250,0.5);
+color: #222222;
+}
 
-#panel .ui-panel-content {
+.ui-panel-content {
     border: 0;
     background: red; 
     padding: 0.5em 1em;
 }
-#panel .ui-widget-content  {
+.ui-widget-content  {
     border: 0;
     padding: 0.5em 1em;
    background: rgba(250,250,250,0.5);
