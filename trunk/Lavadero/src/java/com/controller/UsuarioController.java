@@ -84,7 +84,7 @@ public class UsuarioController implements Serializable {
 
     public void direcionarInicio() throws IOException {
         FacesContext contex = FacesContext.getCurrentInstance();
-        contex.getExternalContext().redirect("../../..");
+        contex.getExternalContext().redirect("../../index.xhtml");
         
     }
 

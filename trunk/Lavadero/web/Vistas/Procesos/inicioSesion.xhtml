@@ -7,46 +7,76 @@
     <h:head>
         <title>Inicio de Sesion</title>
         <link rel="stylesheet" type="text/css" href="../../resources/css/style.css" />
-        
+        <link rel="stylesheet" type="text/css" href="../../resources/css/transparente.css" />
+
     </h:head>
-    <h:body>  <h:form >
-                <p:growl id="msg" />
-        <p:panel styleClass="form-3" rendered="#{usuarioController.mostPL}" style="width:600px" >
-           
-                <div class="container" >
+    <h:body>
+        <h:form >
+            <p:growl id="msg" />
+            <p:panel  header="LOGIN" styleClass="sombra" rendered="#{usuarioController.mostPL}" style="text-align: center;width:600px;position:absolute;left:40%;top: 10%;"  >
+
+                <div class="container" style="color: black" >
                     <header>
-                        <h1 ><strong >Bienbenidos</strong></h1>
-                        <p:graphicImage value="../../Imagenes/logo.png" /> 
-                        <h2 >Porfavor ingresar Para Obtener Acceso a la Pagina!!</h2>
+                        <h1 ><strong style="color: black">Bienbenidos</strong></h1>
+                        <p:graphicImage value="/Imagenes/logo.png" /> 
+                        <h2 style="color: black">Porfavor ingresar Para Obtener Acceso a la Pagina!!</h2>
                     </header>
                 </div>
                 <p class="clearfix">
                     <label for="login">Username</label>
-                     <p:inputText required="true" value="#{usuarioController.usu}" requiredMessage="Ingrese un usuario" />
-                   
+                    <p:inputText required="true" value="#{usuarioController.usu}" requiredMessage="Ingrese un usuario" />
+
                     <label for="password">Password</label>
                     <p:keyboard password="true"   required="true" value="#{usuarioController.pasword}" requiredMessage="ingrese Contraseña" />
                 </p>    
-                <p class="clearfix">
-                    <h:commandButton style="width:100%" value="Iniciar" actionListener="#{usuarioController.iniciar()}"  />
+
+                <p class="clearfix" >
+                    <table  style="width:100%">
+                        <tr>
+                            <td colspan="2"> <p:commandButton  styleClass="botonn"  icon="ui-icon-circle-plus" style="width:100%" value="Iniciar" actionListener="#{usuarioController.iniciar()}" update="@form"  />               
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td> <p:commandButton  style="width: 100%"  styleClass="botonn" value="Inscribirse" action="#{usuarioController.direcionarInscripcion()}"  />               
+                            </td>
+                            <td style="width:50%" >   
+                                <p:commandButton  styleClass="botonn" style="width:100%"   value="GPS" action="#{usuarioController.direcionarGPS()}"  />               
+                            </td>
+                        </tr>
+                    </table>
                 </p>
-                <p class="clearfix">
-                    <h:commandButton   style="width:100%" value="Inscribirse" action="#{usuarioController.direcionarInscripcion()}"/>
-                    <h:commandButton  style="width:100%" value="GPS" action="#{usuarioController.direcionarGPS()}"/>  
-
-                </p>
-       
-           
-        </p:panel>
 
 
-        <p:panel rendered="#{!usuarioController.mostPL}" >
-           
-                <ui:include src="../Plantillas/ManejadorVistas.xhtml" />
-           
-        </p:panel>
 
- </h:form>
+            </p:panel>
+            <p:panel styleClass="paneles" rendered="#{!usuarioController.mostPL}" >
+                <p:layout fullPage="true">
+                    <p:layoutUnit position="north" size="100" >
+                        <ui:insert name="izquierda" >
+                            <ui:include src="../Plantillas/ManejadorVistas.xhtml" />
+                        </ui:insert>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit  position="west" styleClass="form-4" resizable="true" size="250" minSize="200" >
+                        <ui:insert name="izquierda" >
+                            <ui:include src="#{usuarioController.PAGINAACTUALI}" />
+                        </ui:insert>
+
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center">
+                        <ui:insert name="centro" >
+                            <ui:include src="#{usuarioController.PAGINAACTUALC}" />    
+                        </ui:insert>
+                    </p:layoutUnit>
+
+
+                </p:layout>
+
+            </p:panel>
+
+        </h:form>
     </h:body>
 </html>
 

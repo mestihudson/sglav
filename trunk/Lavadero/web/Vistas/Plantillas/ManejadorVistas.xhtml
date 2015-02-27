@@ -9,33 +9,15 @@
         <link rel="stylesheet" type="text/css" href="../../resources/css/style.css" />
     </h:head>
     <h:body>
-        <p:layout fullPage="true">
-         
-                <p:layoutUnit position="north" size="100" >
-
-                    <h:outputText  value="Sesion de: #{administradorController.admin.nombres} #{administradorController.admin.apellidos}" />
-                    <h:outputText value="#{usuarioController.usuario.email}: #{usuarioController.usuario.perfil}" /> <br/>           
-                    <h:outputText value="#{administradorController.lavaderoA.nombre}" style="border: 3px double #FF0000; background-color: #99CCFF" />
-                    <h:outputText value=" Ciudad: #{administradorController.lavaderoA.ciudad}" />            
-                    <h:outputText value=" Nit: #{administradorController.lavaderoA.nit}" /> 
-                    <h:outputText value=" Estado: #{administradorController.lavaderoA.estado} " />  
-                    <h:commandButton value="Cerrar" action="#{usuarioController.cerrar()}"/> 
-
-                </p:layoutUnit>
-
-                <p:layoutUnit  position="west" styleClass="form-4" resizable="true" size="250" minSize="200" >
-                    <ui:include src="#{usuarioController.PAGINAACTUALI}" />
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center">
-                    <ui:include src="#{usuarioController.PAGINAACTUALC}" />
-                </p:layoutUnit>
-
-
-        </p:layout>
-
-
-
+        <ui:composition> 
+            <h:outputText  value="Sesion de: #{administradorController.admin.nombres} #{administradorController.admin.apellidos}" />
+            <h:outputText value="#{usuarioController.usuario.email}: #{usuarioController.usuario.perfil}" /> <br/>           
+            <h:outputText value="#{administradorController.lavaderoA.nombre}" style="border: 3px double #FF0000; background-color: #99CCFF" />
+            <h:outputText value=" Ciudad: #{administradorController.lavaderoA.ciudad}" />            
+            <h:outputText value=" Nit: #{administradorController.lavaderoA.nit}" /> 
+            <h:outputText value=" Estado: #{administradorController.lavaderoA.estado} " />  
+            <h:commandButton value="Cerrar" action="#{usuarioController.cerrar()}"/> 
+        </ui:composition>
 
     </h:body>
 </html>
