@@ -77,7 +77,8 @@ public class UsuarioController implements Serializable {
         FacesContext contex = FacesContext.getCurrentInstance();
         contex.getExternalContext().redirect("Vistas/Procesos/Gmap.xhtml");
     }
-     public void direcionarInscripcion() throws IOException {
+
+    public void direcionarInscripcion() throws IOException {
         FacesContext contex = FacesContext.getCurrentInstance();
         contex.getExternalContext().redirect("Vistas/Procesos/Inscripcion.xhtml");
     }
@@ -85,7 +86,7 @@ public class UsuarioController implements Serializable {
     public void direcionarInicio() throws IOException {
         FacesContext contex = FacesContext.getCurrentInstance();
         contex.getExternalContext().redirect("../../index.xhtml");
-        
+
     }
 
     public void escogerLavadero(Lavadero l) {
