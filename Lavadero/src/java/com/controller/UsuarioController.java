@@ -102,7 +102,7 @@ public class UsuarioController implements Serializable {
         usuario = us.ingresar(getUsu(), getPasword());
         if (usuario != null) {
             if (usuario.getPerfil().equals("Administrador")) {
-                getAdmcon().setAdmin(getAdmcon().adser.consultar(Administrador.class, usuario.getId()));
+                admcon.setAdmin(getAdmcon().adser.consultar(Administrador.class, usuario.getId()));
                 getAdmcon().listarLavaderos(usuario.getId());
                 //setPAGINAACTUALI(PAGINALAVADERO);
                 setPAGINAACTUALC(PAGINALAVADERO);
