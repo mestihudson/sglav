@@ -4,10 +4,25 @@ body {
     -moz-background-size: cover;
     background-size: cover;
 }
-
-.paneles .ui-widget-content {
-border: #191919;
-background: rgba(250,250,250,0.5);
+.ui-panel .ui-widget-content {
+    border: 1px solid #a6c9e2;
+    background:red;
 color: #222222;
 }
-
+.ui-widget-content {
+    border: 1px solid #a6c9e2;
+    background:red;
+    color: #222222;
+}
+.ui-panel .ui-panel-content {
+    border: 0;
+    background: blue; 
+    padding: 0.5em 1em;
+}
+.ui-panel-content .ui-widget-content  {
+    border: 0;
+    background: #51cbee; 
+    padding: 0.5em 1em;
+   background: rgba(250,250,250,0.5);
+    //border: transparent;
+}
