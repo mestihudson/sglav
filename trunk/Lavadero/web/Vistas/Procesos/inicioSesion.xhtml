@@ -9,14 +9,11 @@
         <link rel="stylesheet" type="text/css" href="../../resources/css/style.css" />
         <link rel="stylesheet" type="text/css" href="../../resources/css/transparente.css.css" />
     </h:head>
-    <h:body style="  background: #563c55 url(../../Imagenes/fondos/fondo.jpeg) no-repeat center top;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            background-size: cover;">
+    <h:body >
 
         <h:form >
             <p:growl id="msg" />
-            <p:panel  header="LOGIN" styleClass="sombra" rendered="#{usuarioController.mostPL}" style="text-align: center;width:600px;position:absolute;left:40%;top: 10%;"  >
+            <p:panel  header="LOGIN"  rendered="#{usuarioController.mostPL}" style="text-align: center;width:600px;position:absolute;left:40%;top: 10%;"  >
 
                 <div class="container" style="color: black" >
                     <header>
@@ -36,7 +33,7 @@
                 <p class="clearfix" >
                     <table  style="width:100%">
                         <tr>
-                            <td colspan="2"> <h:commandButton  styleClass="botonn"   style="width:100%" value="Iniciar" actionListener="#{usuarioController.iniciar()}" />               
+                            <td colspan="2"> <p:commandButton  ajax="false" styleClass="botonn"   style="width:100%" value="Iniciar" actionListener="#{usuarioController.iniciar()}" />               
                             </td>
 
                         </tr>
