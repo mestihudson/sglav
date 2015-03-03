@@ -55,10 +55,8 @@ public class LavaderoController implements Serializable {
      */
     public LavaderoController() {
         advancedModel = new DefaultMapModel();
-        System.out.println("Este es La lista de lavaderos");
         for (Lavadero lavadero1 : getLavaderos()) {
             LatLng coord = new LatLng(lavadero1.getCorrdenadax(), lavadero1.getCorrdenaday());
-            System.out.println(lavadero1.getNombre() + "posision x" + lavadero1.getCorrdenadax() + "posision y" + lavadero1.getCorrdenaday());
             advancedModel.addOverlay(new Marker(coord, lavadero1.getNombre(), "", "http://maps.google.com/mapfiles/ms/micons/" + lavadero1.getEstado() + "-pushpin.png"));
         }
     }
@@ -144,6 +142,13 @@ public class LavaderoController implements Serializable {
      */
     public List<Lavadero> getLavaderos() {
         return lavacon.consultarTodo(Lavadero.class);
+    }
+    
+    /**
+     * @return the lavaderos
+     */
+    public List<Lavadero> getLavaderosUsuario() {
+        return lavacon.listarXAdministrador(usucon.getUsuario().getId());
     }
 
     /**

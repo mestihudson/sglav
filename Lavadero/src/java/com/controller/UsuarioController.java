@@ -58,6 +58,9 @@ public class UsuarioController implements Serializable {
     String MENUADMINISTRADOR = "../Plantillas/menuAdministrador.xhtml";
 
     private boolean mostPL = true;
+    private boolean Admin = false;
+    private boolean cliente = false;
+    private boolean lavador = false;
     private boolean mostrarInscrip;
     private boolean mostrarPAI;
 
@@ -102,11 +105,12 @@ public class UsuarioController implements Serializable {
         usuario = us.ingresar(getUsu(), getPasword());
         if (usuario != null) {
             if (usuario.getPerfil().equals("Administrador")) {
-                admcon.setAdmin(getAdmcon().adser.consultar(Administrador.class, usuario.getId()));
+                getAdmcon().setAdmin(getAdmcon().adser.consultar(Administrador.class, usuario.getId()));
                 getAdmcon().listarLavaderos(usuario.getId());
                 //setPAGINAACTUALI(PAGINALAVADERO);
                 setPAGINAACTUALC(PAGINALAVADERO);
                 entcon.listarLavadosEP();
+                Admin=true;
                 mostrarInscrip = false;
                 mostrarPAI = false;
             }
@@ -329,4 +333,30 @@ public class UsuarioController implements Serializable {
     public void setPasword(String pasword) {
         this.pasword = pasword;
     }
+
+    public boolean isAdmin() {
+        return Admin;
+    }
+
+    public void setAdmin(boolean Admin) {
+        this.Admin = Admin;
+    }
+
+    public boolean isCliente() {
+        return cliente;
+    }
+
+    public void setCliente(boolean cliente) {
+        this.cliente = cliente;
+    }
+
+    public boolean isLavador() {
+        return lavador;
+    }
+
+    public void setLavador(boolean lavador) {
+        this.lavador = lavador;
+    }
+    
+    
 }
