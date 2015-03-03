@@ -10,14 +10,15 @@
     </h:head>
     <h:body>
         <ui:composition > 
-             #{administradorController.admin.apellidos}
-            <p:menuButton  style="float: right;top:50%;z-index:3;left:70%;position:absolute;z-index:6"   value="Secion de: #{usuarioController.usuario.login}">
-               <p:menuitem value="#{usuarioController.admcon.admin.nombres}"   icon="ui-icon-person" />               
-                <p:menuitem value="#{usuarioController.usuario.email}"  update="msg" icon="ui-icon-mail-open"/>
-                <p:menuitem value="#{usuarioController.usuario.perfil}"   icon="ui-icon-person" />
-                <p:separator />
-                <p:menuitem value="Cerrar Sesino"  actionListener="#{usuarioController.cerrar()}"  ajax="false" icon="ui-icon-extlink"/>
-            </p:menuButton>
+                      <p:menuButton  style="float: right;top:60%;position:absolute;z-index:6"   value="Secion de: #{usuarioController.usuario.login}">
+                                <p:menuitem value="#{usuarioController.admcon.admin.nombres}" rendered="#{usuarioController.admin}"  icon="ui-icon-person" /> 
+                                <p:menuitem value="#{usuarioController.propietario.nombres}" rendered="#{usuarioController.cliente}"  icon="ui-icon-person" /> 
+                                <p:menuitem value="#{usuarioController.clicon.cliente.nombres}" rendered="#{usuarioController.admin}"  icon="ui-icon-person" /> 
+                                <p:menuitem value="#{usuarioController.usuario.email}"  update="msg" icon="ui-icon-mail-open"/>
+                                <p:menuitem value="#{usuarioController.usuario.perfil}"   icon="ui-icon-person" />
+                                <p:separator />
+                                <p:menuitem value="Cerrar Sesino"  actionListener="#{usuarioController.cerrar()}"  ajax="false" icon="ui-icon-extlink"/>
+                            </p:menuButton>
         </ui:composition>
 
     </h:body>

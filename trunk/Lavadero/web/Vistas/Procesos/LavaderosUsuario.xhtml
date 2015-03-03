@@ -2,32 +2,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+
         <div style="position: absolute; width: 604px; height: 200px; left: 400px; top: 37px">
-        <p:carousel var="lav" value="#{administradorController.lavaderos}" numVisible="3" 
-                    headerText="Escoja el Lavadero a Gestionar" circular="true" style="text-align:center; font-size: 7pt;margin: auto">  
-            <p:panel header="#{lav.nombre}" style="text-align:center; font-size: 7pt;width: 200px">  
-                <p:panelGrid columns="2">
-                        <p:panelGrid columns="1">  
+            <p:carousel var="lav" value="#{lavaderoController.lavaderosUsuario}" numVisible="3" 
+                        headerText="Escoja el Lavadero a Gestionar" circular="true" style="text-align:center; font-size: 7pt;margin: auto;">  
+                <p:panel header="#{lav.nombre}" style="text-align:center; font-size: 7pt;width: 200px">  
+                    <p:panelGrid columns="2">
+                        <p:panelGrid columns="1"> 
+                            <p:graphicImage value="/Imagenes/Lavador/foto.jpg" /> 
                             <h:outputText value="#{lav.ciudad}" />
                             <h:outputText value="#{lav.email}" />
                             <h:outputText value="#{lav.estado}" />
                             <h:outputText value="#{lav.nit}" />                                
                             <h:commandButton  value="#{lav.id}" action="#{usuarioController.escogerLavadero(lav)}"
-                                                     style="font-size: small">
-                                    </h:commandButton>     
-                       </p:panelGrid>                         
-                </p:panelGrid>              
-            </p:panel>  
-       
-        </p:carousel>  
+                                              style="font-size: small">
+                            </h:commandButton>     
+                        </p:panelGrid>                         
+                    </p:panelGrid>              
+                </p:panel> 
+                
+
+            </p:carousel>  
         </div>
-        
-        
+
+
     </h:body>
 </html>
 

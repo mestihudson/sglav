@@ -7,10 +7,13 @@
     <h:head>
         <title>Inicio de Sesion</title>
         <link rel="stylesheet" type="text/css" href="../../resources/css/style.css" />
-        <link rel="stylesheet" type="text/css" href="../../resources/css/transparente.css" />
-
+        <link rel="stylesheet" type="text/css" href="../../resources/css/transparente.css.css" />
     </h:head>
-    <h:body>
+    <h:body style="  background: #563c55 url(../../Imagenes/fondos/fondo.jpeg) no-repeat center top;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;">
+
         <h:form >
             <p:growl id="msg" />
             <p:panel  header="LOGIN" styleClass="sombra" rendered="#{usuarioController.mostPL}" style="text-align: center;width:600px;position:absolute;left:40%;top: 10%;"  >
